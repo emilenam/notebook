@@ -10,8 +10,8 @@ jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
-      lib: ${{ steps.filter.outputs. }}
-      tests: ${{ steps.filter.outputs. }}
+      lib: ${{ steps.filter.outputs.lib }}
+      tests: ${{ steps.filter.outputs.tests }}
     steps:
     - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v4
