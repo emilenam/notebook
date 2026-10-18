@@ -16,8 +16,8 @@
 
   institution: "University of Chile",
   institution-short: "UCH",
-  subtitle: "sin globito no hay fiesta",
-  authors: "Diego Arias, Gabriel Carmona, Martín Ruiz-Tagle",
+  subtitle: "camino auraliano",
+  authors: "Javier Azócar, Emilia Leñam, Diego Salas",
   logo: "logo.svg",
   logo-height: 128pt,
 )
