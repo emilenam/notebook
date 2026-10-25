@@ -36,8 +36,8 @@ jobs:
       if: github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'master'
       continue-on-error: true
       run: |
-        gh release delete master -y --cleanup-tag
+        gh release delete build -y --cleanup-tag
     - name: Create release
       if: github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'master'
       run: |
-        gh release create master notebook.pdf
+        gh release create build notebook.pdf
