@@ -4,6 +4,7 @@
 name = "Lazy Segment Tree"
 [info]
 time = "$O(log n)$"
+description = "Requires struct U with map(T&,l,r) & add(U&)"
 - */
 template <class T, auto op, class U> struct STLazy {
   int n; T e; U id; vec<T> s; vec<U> lz;
