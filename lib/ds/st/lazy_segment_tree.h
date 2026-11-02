@@ -14,26 +14,25 @@ template <class T, auto op, class U> struct STLazy {
   T query(int l, int r, int v, int tl, int tr) {
     if (r <= tl || tr <= l) return e;
     if (l <= tl && tr <= r) return s[v];
-    push(v, tl, tr);
     int tm = split(tl, tr);
+    push(v, tl, tr, tm);
     return op(query(l, r, v<<1, tl, tm),
               query(l, r, v<<1|1, tm, tr));
   }
   void upd(int l, int r, U u) { upd(l, r, u, 1, 0, n); }
-  void upd(int l, int r, U u, int v, int tl, int tr) {
+  void upd(int l, int r, U& u, int v, int tl, int tr) {
     if (r <= tl || tr <= l) return;
     if (l <= tl && tr <= r) { 
       u.map(s[v], tl, tr);
       if (v < n) lz[v].add(u);
       return;
     }
-    push(v, tl, tr);
     int tm = split(tl, tr);
+    push(v, tl, tr, tm);
     upd(l, r, u, v<<1, tl, tm), upd(l, r, u, v<<1|1, tm, tr);
     s[v] = op(s[v<<1], s[v<<1|1]);
   }
-  void push(int v, int tl, int tr) {
-    int tm = split(tl, tr);
+  void push(int v, int tl, int tr, int tm) {
     upd(tl, tm, lz[v], v<<1, tl, tm);
     upd(tm, tr, lz[v], v<<1|1, tm, tr);
     lz[v] = id;
