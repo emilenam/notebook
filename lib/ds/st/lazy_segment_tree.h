@@ -4,7 +4,7 @@
 name = "Lazy Segment Tree"
 [info]
 time = "$O(log n)$"
-description = "Requires struct U with map(T&,l,r) & add(U&)"
+description = "Requires struct U with map(T&,l,r) & add(U&,l,r,tl,tr)"
 - */
 template <class T, auto op, class U> struct STLazy {
   int n; T e; U id; vec<T> s; vec<U> lz;
@@ -22,9 +22,11 @@ template <class T, auto op, class U> struct STLazy {
   void upd(int l, int r, U u) { upd(l, r, u, 1, 0, n); }
   void upd(int l, int r, U& u, int v, int tl, int tr) {
     if (r <= tl || tr <= l) return;
-    if (l <= tl && tr <= r) { 
-      u.map(s[v], tl, tr);
-      if (v < n) lz[v].add(u);
+    if (l <= tl && tr <= r) {
+      //si no necesitas los rangos, puedes usar .add(u) directo
+      U x = id; x.add(u, l, r, tl, tr);
+      x.map(s[v], tl, tr);
+      if (v < n) lz[v].add(x, tl, tr, tl, tr);
       return;
     }
     int tm = split(tl, tr);
@@ -33,8 +35,8 @@ template <class T, auto op, class U> struct STLazy {
     s[v] = op(s[v<<1], s[v<<1|1]);
   }
   void push(int v, int tl, int tr, int tm) {
-    upd(tl, tm, lz[v], v<<1, tl, tm);
-    upd(tm, tr, lz[v], v<<1|1, tm, tr);
+    upd(tl, tr, lz[v], v<<1, tl, tm);
+    upd(tl, tr, lz[v], v<<1|1, tm, tr);
     lz[v] = id;
   }
   void build(vec<T>& a) {

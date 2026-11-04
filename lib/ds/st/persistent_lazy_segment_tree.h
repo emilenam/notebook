@@ -37,8 +37,9 @@ template <class T, auto op, class U> struct PSTLazy {
     if (r <= tl || tr <= l) return v;
     if (l <= tl && tr <= r) {
       v = copy(v);
-      u.map(s[v].x, tl, tr);
-      s[v].lz.add(u);
+      U x = id; x.add(u, l,r, tl,tr);
+      x.map(s[v], tl, tr);
+      s[v].lz.add(x, tl,tr, tl,tr);
     } else {
       v = push(v, tl, tr);
       int tm = (tl+tr)/2;
