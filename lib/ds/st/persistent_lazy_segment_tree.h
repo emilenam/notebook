@@ -4,7 +4,7 @@ name = "Persistent Lazy Segment Tree"
 [info]
 time = "$O(log n)$"
 - */
-template <class T, auto op, class U> struct SegmentTree {
+template <class T, auto op, class U> struct PSTLazy {
   struct Node {
     int l = 0, r = 0; 
     T x;
@@ -12,7 +12,7 @@ template <class T, auto op, class U> struct SegmentTree {
   };
   int n; T e; U id;
   vec<Node> s;
-  SegmentTree(int n, T e, U id)
+  PSTLazy(int n, T e, U id)
     : n(n), e(e), id(id), s(1, {0, 0, e, id}) {}
   int copy(int v) { 
     s.emplace_back(s[v]);
@@ -33,12 +33,12 @@ template <class T, auto op, class U> struct SegmentTree {
   int upd(int l, int r, U u, int v) {
     return upd(l, r, u, v, 0, n);
   }
-  int upd(int l, int r, U u, int v, int tl, int tr) {
+  int upd(int l, int r, U & u, int v, int tl, int tr) {
     if (r <= tl || tr <= l) return v;
     if (l <= tl && tr <= r) {
       v = copy(v);
-      s[v].x = u.map(s[v].x, tl, tr);
-      s[v].lz = s[v].lz(u);
+      u.map(s[v].x, tl, tr);
+      s[v].lz.add(u);
     } else {
       v = push(v, tl, tr);
       int tm = (tl+tr)/2;
