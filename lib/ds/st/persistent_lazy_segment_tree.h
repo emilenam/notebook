@@ -38,7 +38,7 @@ template <class T, auto op, class U> struct SegmentTree {
     if (l <= tl && tr <= r) {
       v = copy(v);
       U x = id; x.add(u, l,r, tl,tr);
-      x.map(s[v], tl, tr);
+      x.map(s[v].x, tl, tr);
       s[v].lz.add(x, tl,tr, tl,tr);
     } else {
       v = push(v, tl, tr);
