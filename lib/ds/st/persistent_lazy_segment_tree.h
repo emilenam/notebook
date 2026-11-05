@@ -33,13 +33,12 @@ template <class T, auto op, class U> struct SegmentTree {
   int upd(int l, int r, U u, int v) {
     return upd(l, r, u, v, 0, n);
   }
-  int upd(int l, int r, U & u, int v, int tl, int tr) {
+  int upd(int l, int r, U u, int v, int tl, int tr) {
     if (r <= tl || tr <= l) return v;
     if (l <= tl && tr <= r) {
       v = copy(v);
-      U x = id; x.add(u, l,r, tl,tr);
-      x.map(s[v].x, tl, tr);
-      s[v].lz.add(x, tl,tr, tl,tr);
+      s[v].x = u.map(s[v].x, tl, tr);
+      s[v].lz = s[v].lz(u);
     } else {
       v = push(v, tl, tr);
       int tm = (tl+tr)/2;
