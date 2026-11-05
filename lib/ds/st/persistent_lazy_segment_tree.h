@@ -4,7 +4,7 @@ name = "Persistent Lazy Segment Tree"
 [info]
 time = "$O(log n)$"
 - */
-template <class T, auto op, class U> struct PSTLazy {
+template <class T, auto op, class U> struct SegmentTree {
   struct Node {
     int l = 0, r = 0; 
     T x;
@@ -12,7 +12,7 @@ template <class T, auto op, class U> struct PSTLazy {
   };
   int n; T e; U id;
   vec<Node> s;
-  PSTLazy(int n, T e, U id)
+  SegmentTree(int n, T e, U id)
     : n(n), e(e), id(id), s(1, {0, 0, e, id}) {}
   int copy(int v) { 
     s.emplace_back(s[v]);

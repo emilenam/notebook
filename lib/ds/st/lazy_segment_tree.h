@@ -6,9 +6,9 @@ name = "Lazy Segment Tree"
 time = "$O(log n)$"
 description = "Requires struct U with map(T&,l,r) & add(U&,l,r,tl,tr)"
 - */
-template <class T, auto op, class U> struct STLazy {
+template <class T, auto op, class U> struct SegmentTree {
   int n; T e; U id; vec<T> s; vec<U> lz;
-  STLazy(int n, T e, U id)
+  SegmentTree(int n, T e, U id)
     : n(n), e(e), id(id), s(n<<1, e), lz(n, id) {}
   T query(int l, int r) { return query(l, r, 1, 0, n); }
   T query(int l, int r, int v, int tl, int tr) {
