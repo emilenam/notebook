@@ -9,7 +9,7 @@ struct Tag {
   void map(ll & x, int l, int r) const {
     x = (x * b % mod + c * (r - l) % mod) % mod;
   }
-  void add(Tag & nu, int l, int r, int tl, int tr) const {
+  void add(Tag & nu, int l, int r, int tl, int tr) {
     b = b * nu.b % mod,
     c = (c * nu.b + nu.c) % mod;
   }

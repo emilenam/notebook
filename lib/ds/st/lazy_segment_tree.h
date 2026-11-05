@@ -40,7 +40,7 @@ template <class T, auto op, class U> struct STLazy {
     lz[v] = id;
   }
   void build(vec<T>& a) {
-    auto pw2 = bit_ceil(sz(a));
+    auto pw2 = bit_ceil(size(a));
     rep(i,0,n) s[(i + pw2) % n + n] = a[i];
     for (int i = n - 1; i >= 1; i--) s[i] = op(s[i<<1], s[i<<1|1]);
   }
