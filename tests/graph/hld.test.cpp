@@ -5,12 +5,8 @@
 
 struct Tag {
   ll u = 0;
-  ll map(ll x, int l, int r) const {
-    return x + u*(r-l);
-  }
-  Tag operator()(Tag t) const {
-    return {t.u + u};
-  }
+  void map(ll & x, int l, int r) { x += u*(r-l); }
+  void add(Tag & nu, int l, int r, int tl, int tr) { u += nu.u; }
 };
 
 int main() {

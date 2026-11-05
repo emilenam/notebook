@@ -6,13 +6,11 @@ description = "Tag operator type used for lazy propagation in lazy structures."
 - */
 struct Tag {
   ll b = 1, c = 0;
-  ll map(ll x, int l, int r) const {
-    return (x * b % mod + c * (r - l) % mod) % mod;
+  void map(ll & x, int l, int r) {
+    x = (x * b % mod + c * (r - l) % mod) % mod;
   }
-  Tag operator()(Tag nu) const {
-    return {
-      b * nu.b % mod,
-      (c * nu.b + nu.c) % mod
-    };
+  void add(Tag & nu, int l, int r, int tl, int tr) {
+    b = b * nu.b % mod,
+    c = (c * nu.b + nu.c) % mod;
   }
 };

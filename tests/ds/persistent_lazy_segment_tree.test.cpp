@@ -1,7 +1,23 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_range_affine_range_sum"
 #include "../../lib/template.h"
 #include "../../lib/ds/st/persistent_lazy_segment_tree.h"
-#include "range_affine_op.h"
+
+const ll mod = 998244353;
+
+inline ll mod_plus(ll a, ll b) { return (a + b) % mod; }
+
+struct Tag {
+  ll b = 1, c = 0;
+  ll map(ll x, int l, int r) const {
+    return (x * b % mod + c * (r - l) % mod) % mod;
+  }
+  Tag operator()(Tag nu) const {
+    return {
+      b * nu.b % mod,
+      (c * nu.b + nu.c) % mod
+    };
+  }
+};
 
 int path_copy(auto &t, int l, int r, int k, int v) {
   return path_copy(t, l, r, k, v, 0, t.n); 
